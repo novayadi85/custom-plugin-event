@@ -1,0 +1,47 @@
+
+extend type CatalogProduct {
+  customType: productTypes!
+  event: [Event]
+}
+
+type Event {
+   variantId: ID !
+   productId: ID !
+   startDate: Date !
+   EndDate: Date !
+   location: String !
+}
+
+enum productTypes{
+  catalog
+  event
+}
+
+extend type Product {
+  customType: productTypes!
+  event: [Event]
+}
+
+extend type Product {
+  customType: productTypes!
+  event: [Event]
+}
+
+input EventInput {
+
+  productId: ID!
+
+  variantId: ID!
+}
+
+extend input ProductInput {
+  "Product input"
+  event: [EventInput]
+}
+
+extend type Query {
+  events(
+    productId: ID!
+    variantId: ID!
+  ): Event
+}
