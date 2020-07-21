@@ -14,7 +14,7 @@ type Event {
 
    "Date/time this event was end at"
    endDate: Date 
-   
+
    "Where the event location"
    location: String 
 
@@ -49,6 +49,14 @@ extend input ProductInput {
 
  "Product customType"
   customType: productTypes!
+}
+
+extend enum CatalogBooleanFilterName {
+  "is Event"
+  isEvent
+
+  "is Catalog"
+  isCatalog
 }
 
 extend type Query {
