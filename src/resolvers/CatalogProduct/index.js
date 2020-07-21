@@ -1,27 +1,25 @@
-import { decodeProductOpaqueId } from "../../xforms/id.js";
-
 export default {
-    event: async (node, args, context, info) => {
+    event: async (node) => {
         const { event } = node || {};
+        
         if(typeof event != "undefined"){
-            const events = await Promise.all(event.map(async _catalog => {
-                
-                const productId = decodeProductOpaqueId(_catalog.productId)
-                const variantId = decodeProductOpaqueId(_catalog.variantId)
-                const filter = {
-                    productId,
-                    variantId
+            const events = await Promise.all(event.map(async item => {
+                const { startDate, endDate } = item
+                const start = new Date(startDate);  
+                const expired = new Date(endDate) 
+
+                if (endDate !== null && expired < start) {    
+                    //throw Error ('Invalid Date')
+                    return []
                 }
-                _catalog.event = await context.queries.events(context, false, filter);
-                _catalog.variantId = decodeProductOpaqueId(_catalog.variantId)
                 
-                return _catalog
-    
+                return item
             }));
-
+             
             node.event = events
-
+            
             return events
+            
         }
     }
 }

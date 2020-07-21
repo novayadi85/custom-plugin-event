@@ -3,7 +3,8 @@ import schemas from "./schemas/index.js";
 import queries from "./queries/index.js";
 import resolvers from "./resolvers/index.js";
 import preStartup from "./preStartup.js";
-
+import { EventSchema } from "./simpleSchemas.js";
+import publishProductToCatalog from "./utils/publishProductToCatalog.js";
 /**
  * @summary Import and call this function to add this plugin to your API.
  * @param {ReactionAPI} app The ReactionAPI instance
@@ -14,13 +15,20 @@ export default async function register(app) {
     label: "Custom plugin event",
     name: "custom-plugin-event",
     version: pkg.version,
+    catalog: {
+      customPublishedProductFields: ["event"],
+    },
     functionsByType: {
       preStartup: [preStartup],
+      publishProductToCatalog: [publishProductToCatalog]
     },
     graphQL: {
       schemas,
       resolvers
     },
     queries,
+    simpleSchemas: {
+      EventSchema
+    }
   });
 }

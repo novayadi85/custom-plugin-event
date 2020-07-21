@@ -5,11 +5,13 @@ extend type CatalogProduct {
 }
 
 type Event {
-   variantId: ID !
-   productId: ID !
-   startDate: Date !
-   EndDate: Date !
-   location: String !
+   variantId: ID 
+   productId: ID 
+   "Date/time this event was start at"
+   startDate: Date 
+   "Date/time this event was end at"
+   EndDate: Date 
+   location: String 
 }
 
 enum productTypes{
@@ -22,21 +24,22 @@ extend type Product {
   event: [Event]
 }
 
-extend type Product {
-  customType: productTypes!
-  event: [Event]
-}
-
 input EventInput {
+  startDate: Date !
 
-  productId: ID!
+  endDate: Date !
 
-  variantId: ID!
+  location: String !
+
+  author: String
 }
 
 extend input ProductInput {
   "Product input"
   event: [EventInput]
+
+ "Product customType"
+  customType: productTypes!
 }
 
 extend type Query {
