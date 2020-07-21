@@ -6,12 +6,21 @@ extend type CatalogProduct {
 
 type Event {
    variantId: ID 
+
    productId: ID 
+
    "Date/time this event was start at"
    startDate: Date 
+
    "Date/time this event was end at"
-   EndDate: Date 
+   endDate: Date 
+   
+   "Where the event location"
    location: String 
+
+   "Who create the event"
+   author: String 
+
 }
 
 enum productTypes{
