@@ -39,14 +39,86 @@ mutation {
 ``` 
 
 {
-  catalogItems(shopIds:["xxx"],booleanFilters:{
+  catalogItems(shopIds:["xxxx"],booleanFilters:{
     name:isEvent,
     value: true
   }){
     totalCount
+    edges {
+      cursor
+      node {
+        _id
+        ... on CatalogItemProduct {
+          product {
+            _id
+            event{
+              location
+            }
+            customType
+            title
+            slug
+            description
+            vendor
+            isLowQuantity
+            isSoldOut
+            isBackorder
+            variants{
+              _id
+              
+            }
+            metafields {
+              description
+              key
+              namespace
+              scope
+              value
+              valueType
+            }
+            shop {
+              currency {
+                code
+              }
+            }
+            pricing {
+              compareAtPrice {
+                displayAmount
+              }
+              currency {
+                code
+              }
+              displayPrice
+              minPrice
+              maxPrice
+            }
+            primaryImage {
+              URLs {
+                thumbnail
+                small
+                medium
+                large
+              }
+            }
+          }
+        }
+      }
     }
+  }
 }
 
+```
+
+```
+mutation {
+  publishProductsToCatalog(productIds: ["cmVhY3Rpb24vcHJvZHVjdDpRdkpyckRucm5uREZrOW92Sw=="]){
+    _id
+    product{
+      event{
+        location
+        productId
+      }
+    }
+  }
+}
 ```
 
 ## Summary
