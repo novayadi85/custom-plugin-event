@@ -1,5 +1,5 @@
-import event from "./Event.js";
+import events from "./Event.js";
 
 export default {
-    event
+    events
 };
