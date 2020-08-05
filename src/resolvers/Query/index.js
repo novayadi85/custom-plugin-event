@@ -1,4 +1,4 @@
-import events from "./Event.js";
+import events from "./Events.js";
 
 export default {
     events
