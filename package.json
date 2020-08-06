@@ -1,7 +1,7 @@
 {
   "name": "@reactioncommerce/custom-plugin-event",
   "description": "Boilerplate Example plugin for the Reaction API",
-  "version": "1.0.1-development",
+  "version": "0.0.0-development",
   "main": "index.js",
   "type": "module",
   "engines": {
@@ -25,7 +25,7 @@
   },
   "sideEffects": false,
   "dependencies": {
-    "@reactioncommerce/api-utils": "^1.14.4"
+    "@reactioncommerce/api-utils": "^1.14.5"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
@@ -63,6 +63,11 @@
     "extends": [
       "@commitlint/config-conventional"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "prettier": {
     "arrowParens": "always"
