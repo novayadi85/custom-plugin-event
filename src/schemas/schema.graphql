@@ -1,9 +1,9 @@
 extend type CatalogProduct {
-  event: Event
+  event: ProductEvent
 }
 
-"Event contain information about an event"
-type Event {
+"ProductEvent contain information about an event"
+type ProductEvent {
    "Event host"
    host: String! 
 
@@ -21,10 +21,10 @@ type Event {
 }
 
 extend type Product {
-  event: Event
+  event: ProductEvent
 }
 
-input EventInput {
+input ProductEventInput {
   "Event host"
   host: String!
 
@@ -43,5 +43,5 @@ input EventInput {
 
 extend input ProductInput {
   "Product input"
-  event: EventInput
+  event: ProductEventInput
 }
