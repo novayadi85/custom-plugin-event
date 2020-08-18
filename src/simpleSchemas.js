@@ -1,46 +1,35 @@
 import SimpleSchema from "simpl-schema";
 
-export const EventSchemas = new SimpleSchema({
-  startDate:  {
+export const EventSchema = new SimpleSchema({
+  host: {
+    type: String,
+    label: "Host of event"
+  },
+  start: {
     type: Date,
-    optional: true,
     label: "Date/time this event was start at"
   },
-  endDate:  {
-      type: Date,
-      optional: true,
-      label: "Date/time this event was expired at"
+  end: {
+    type: Date,
+    optional: true,
+    label: "Date/time this event was expired at"
   },
-  location:  {
-      type: String,
-      optional: true
+  location: {
+    type: String,
+    label: "Location"
   },
   description: {
     type: String,
+    label: "Product description",
     optional: true
   },
-  variantId:  {
+  map: {
     type: String,
+    label: "Event map",
     optional: true
-  },
-  productId:  {
-      type: String,
-      optional: true
-  },
+  }
 });
 
-
-export const EventSchema = new SimpleSchema({
-  "event": {
-    type: Array,
-    label: "Event",
-    optional: true
-  },
-  "event.$": {
-    type: EventSchemas
-  },
-  
-});
 
 export function extendProductSchemas(schemas) {
   const {
@@ -50,32 +39,17 @@ export function extendProductSchemas(schemas) {
 
   CatalogProduct.extend({
     "event": {
-      type: Array,
+      type: EventSchema,
       label: "Event",
       optional: true
-    },
-    "event.$": {
-      type: EventSchemas
-    },
-    customType:  {
-      type: String,
-      optional: true
-    },
-    
+    }
   });
 
   Product.extend({
     "event": {
-      type: Array,
+      type: EventSchema,
       label: "Event Obj",
       optional: true
-    },
-    "event.$": {
-      type: EventSchemas
-    },
-    customType:  {
-      type: String,
-      optional: true
-    },
+    }
   })
 }

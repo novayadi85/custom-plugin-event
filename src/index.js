@@ -5,7 +5,7 @@ import resolvers from "./resolvers/index.js";
 import preStartup from "./preStartup.js";
 import { EventSchema } from "./simpleSchemas.js";
 import publishProductToCatalog from "./utils/publishProductToCatalog.js";
-import xformCatalogBooleanFilters from "./utils/xformCatalogBooleanFilters.js";
+// import xformCatalogBooleanFilters from "./utils/xformCatalogBooleanFilters.js";
 /**
  * @summary Import and call this function to add this plugin to your API.
  * @param {ReactionAPI} app The ReactionAPI instance
@@ -14,7 +14,7 @@ import xformCatalogBooleanFilters from "./utils/xformCatalogBooleanFilters.js";
 export default async function register(app) {
   await app.registerPlugin({
     label: "Custom plugin event",
-    name: "custom-plugin-event",
+    name: "event",
     version: pkg.version,
     catalog: {
       customPublishedProductFields: ["event"],
@@ -22,7 +22,7 @@ export default async function register(app) {
     functionsByType: {
       preStartup: [preStartup],
       publishProductToCatalog: [publishProductToCatalog],
-      xformCatalogBooleanFilters: [xformCatalogBooleanFilters]
+      // xformCatalogBooleanFilters: [xformCatalogBooleanFilters]
     },
     graphQL: {
       schemas,

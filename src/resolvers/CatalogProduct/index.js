@@ -1,25 +1,17 @@
 export default {
     event: async (node) => {
         const { event } = node || {};
-        
-        if(typeof event != "undefined"){
-            const events = await Promise.all(event.map(async item => {
-                const { startDate, endDate } = item
-                const start = new Date(startDate);  
-                const expired = new Date(endDate) 
 
-                if (endDate !== null && expired < start) {    
-                    //throw Error ('Invalid Date')
-                    return []
-                }
-                
-                return item
-            }));
-             
-            node.event = events
-            
-            return events
-            
+        if (!event) return null
+        const { start, end } = event
+        const startDate = new Date(start);  
+        const endDate = new Date(end) 
+
+        if (end && endDate < startDate) {    
+            throw Error('End Date must be later that start date')
         }
+
+        node.event = event
+        return event
     }
 }

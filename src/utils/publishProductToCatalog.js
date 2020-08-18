@@ -1,26 +1,16 @@
-export default async function publishProductToCatalog(catalogProduct, { product}) {
-    const { event, customType} = product || []
-    catalogProduct.customType = customType || 'catalog';
-    
-    if(typeof event != "undefined"){
-        const events = await Promise.all(event.map(async item => {
-            const { startDate, endDate } = item
-            const start = new Date(startDate);  
-            const expired = new Date(endDate) 
+export default function publishProductToCatalog(catalogProduct, { product}) {
+    const { event } = product || {}
+    if (!event) return null
 
-            if (endDate !== null && expired < start) {    
-                throw Error ('Invalid Date')
-            }
-           
-            item.variantId = catalogProduct.variantId
-            item.productId = catalogProduct.productId
-            return item
+    const { start, end } = event
+    const startDate = new Date(start);  
+    const endDate = new Date(end) 
 
-        }));
-         
-        catalogProduct.event  = events
-        
+    if (end && endDate < startDate) {    
+        throw Error('End Date must be later that start date')
     }
 
-   
+    catalogProduct.event = event
+    return event   
 }
+

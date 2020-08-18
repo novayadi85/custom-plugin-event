@@ -1,67 +1,47 @@
-
 extend type CatalogProduct {
-  customType: productTypes!
-  event: [Event]
+  event: ProductEvent
 }
 
-type Event {
-   variantId: ID 
-
-   productId: ID 
+"ProductEvent contain information about an event"
+type ProductEvent {
+   "Event host"
+   host: String! 
 
    "Date/time this event was start at"
-   startDate: Date 
+   start: DateTime! 
 
    "Date/time this event was end at"
-   endDate: Date 
+   end: DateTime
 
    "Where the event location"
-   location: String 
+   location: String!
 
-   "Who create the event"
-   author: String 
-
-}
-
-enum productTypes{
-  catalog
-  event
+   "Google Map Url"
+   map: String
 }
 
 extend type Product {
-  customType: productTypes!
-  event: [Event]
+  event: ProductEvent
 }
 
-input EventInput {
-  startDate: Date !
+input ProductEventInput {
+  "Event host"
+  host: String!
 
-  endDate: Date !
+  "Event start date"
+  start: DateTime!
 
-  location: String !
+  "Event end date"
+  end: DateTime
 
-  author: String
+  "Event venue / location"
+  location: String!
+
+  "Google Map Url"
+  map: String
 }
 
 extend input ProductInput {
   "Product input"
-  event: [EventInput]
-
- "Product customType"
-  customType: productTypes!
-}
-
-extend enum CatalogBooleanFilterName {
-  "is Event"
-  isEvent
-
-  "is Catalog"
-  isCatalog
-}
-
-extend type Query {
-  events(
-    productId: ID!
-    variantId: ID!
-  ): Event
+  event: ProductEventInput
 }
